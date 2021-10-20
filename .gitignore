@@ -2,6 +2,9 @@
 .vscode/
 .profile
 
+*.o
+*.cf
+*.exe
 
 *.png
 *.bak
