@@ -22,7 +22,7 @@ architecture with_process1 of gcd_tb is
   signal o: integer;
 begin
 
-  --a <= 7364 after 20 ns, 234234 after 30 ns;
+  a <= 7364 after 20 ns, 234234 after 30 ns;
 
   gcd_inst: entity work.gcd(with_process) port map (a,b,o);
   
