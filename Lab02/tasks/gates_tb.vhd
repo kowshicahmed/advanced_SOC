@@ -14,6 +14,7 @@ begin
 
   gates_1: entity work.gates(slice)        port map (a, b, y1);
   -- YOUR INSTANTIATION HERE
+  gates_2: entity work.gates(withprocess)  port map (a, b, y2);
 
   process
   begin
@@ -28,12 +29,20 @@ begin
         end if;       
         wait for 10 ns;
 
-        -- YOUR ASSERT STATEMENT HERE
-          report -- YOUR MODIFACTIONS FOR THE ERROR MESSAGE HERE IN THIS REPORT STATEMENT
+          report
                 "(a,b)=(" 
                  & std_logic'image(a) & "," 
                  & std_logic'image(b) & "):"
-                 & to_string(y1); 
+                 & to_string(y1);
+              
+        assert y1 = y2
+        -- YOUR ASSERT STATEMENT HERE
+          report -- YOUR MODIFACTIONS FOR THE ERROR MESSAGE HERE IN THIS REPORT STATEMENT
+                 "The modules do not match at (a,b)=(" 
+                 & std_logic'image(a) & "," 
+                 & std_logic'image(b) & "):"
+                 & to_string(y1) & " /= " 
+                 & to_string(y2);
       end loop;  
     end loop;  
     wait;

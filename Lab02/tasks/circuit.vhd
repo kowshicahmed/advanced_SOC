@@ -36,22 +36,22 @@ begin
             (count(1) xor count(0)) ); 
 end architecture;
 
-architecture withfunc of circuit is
-    signal x : unsigned(N-1 downto 0);
+-- architecture withfunc of circuit is
+--     signal x : unsigned(N-1 downto 0);
   
-    function f (v: unsigned) return std_logic_vector is
-      -- YOUR FUNCTION IMPLEMENTATION HERE
-    end function; 
+--     function f (v: unsigned) return std_logic_vector is
+--       -- YOUR FUNCTION IMPLEMENTATION HERE
+--     end function; 
   
-  begin
+--   begin
   
-    counter:
-    x <= (others=>'0') when reset = '1' else
-    x + 1              when rising_edge(clk) and enable = '1';
+--     counter:
+--     x <= (others=>'0') when reset = '1' else
+--     x + 1              when rising_edge(clk) and enable = '1';
    
-    o <= f(x);
+--     o <= f(x);
   
-  end;
+--   end;
   
   architecture withprocess of circuit is
     signal x : unsigned(N-1 downto 0);
@@ -64,6 +64,16 @@ architecture withfunc of circuit is
   
     process (x, clk, reset)
       -- YOUR PROCESS IMPLEMENTATION HERE
+      --for loop
+    begin
+      o <= (x(7) & 
+            (x(7) xor x(6)) & 
+            (x(6) xor x(5)) & 
+            (x(5) xor x(4)) & 
+            (x(4) xor x(3)) & 
+            (x(3) xor x(2)) & 
+            (x(2) xor x(1)) & 
+            (x(1) xor x(0)) ); 
     end process;   
   end;
   
@@ -78,5 +88,8 @@ architecture withfunc of circuit is
          x + 1         when rising_edge(clk) and enable = '1';
   
     -- YOUR GENERATE IMPLEMENTATION HERE
-  
+      o(N-1) <= x(N-1);
+    gen: for i in 0 to N-2 generate
+      o(i) <= x(i) xor x(i + 1);
+    end generate;
   end;

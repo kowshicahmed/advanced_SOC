@@ -39,9 +39,19 @@ begin
 
 end;
 
-architecture withprocess of gates is   
+architecture withprocess of gates is  
+  signal   t: std_logic_vector(6 downto 0);
 begin
-
   -- YOUR PROCESS DESCRIPTION HERE
-
-end;
+  y <= t;
+  process (a,b)
+  begin
+    t(0) <= a and  b;                         
+    t(1) <= a or   b;
+    t(2) <= a xor  b;
+    t(3) <=   not  a;
+    t(4) <= a nand b;
+    t(5) <= a nor  b;
+    t(6) <= a xnor b;
+  end process;
+end withprocess;

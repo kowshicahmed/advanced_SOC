@@ -1,6 +1,8 @@
 .devcontainer/
 .vscode/
 .profile
+*/src/work/*
+*/tasks/work/*
 
 *.o
 *.cf
